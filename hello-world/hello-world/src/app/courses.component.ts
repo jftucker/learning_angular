@@ -1,26 +1,9 @@
 import { Component } from '@angular/core';
-import { CoursesService } from './courses.service';
 
 @Component({
   selector: 'courses',
-  template: `
-    <h2>{{ getTitle() }}</h2>
-    <ul>
-      <li *ngFor="let course of courses">
-        {{ course }}
-      </li>
-    </ul>
-  `,
+  template: ` {{ text | summary: 10 }} `,
 })
 export class CoursesComponent {
-  title = 'List of courses';
-  courses;
-
-  constructor(service: CoursesService) {
-    this.courses = service.getCourses();
-  }
-
-  getTitle() {
-    return this.title;
-  }
+  text = `this and that this is a long piece of text because i dont know how to generate lorem ipsum dynamically`;
 }
