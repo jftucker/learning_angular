@@ -1,7 +1,9 @@
 <i
   class="fa fa-5x"
-  [class.fa-star]="isSelected"
-  [class.fa-star-o]="!isSelected"
+  [ngClass]="{
+    'fa-star': isSelected,
+    'fa-star-o': !isSelected
+  }"
   (click)="onClick()"
   aria-hidden="true"
 >
