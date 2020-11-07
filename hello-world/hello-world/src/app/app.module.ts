@@ -10,6 +10,8 @@ import { CoursesService } from './courses.service';
 import { SummaryPipe } from './summary.pipe';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { TitleCasePipe } from './titleCase.pipe';
+import { PanelComponent } from './panel/panel.component';
+import { LikeComponent } from './like/like.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { TitleCasePipe } from './titleCase.pipe';
     CoursesComponent,
     TitleCasePipe,
     FavoriteComponent,
+    PanelComponent,
+    LikeComponent,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule],
   providers: [CoursesService],
