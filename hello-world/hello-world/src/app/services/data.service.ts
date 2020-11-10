@@ -41,14 +41,11 @@ export class DataService {
   }
 
   delete(id) {
-    return (
-      this.http
-        .delete(this.url + '/' + id)
-        .map((response: Response) => response.body)
-        // .toPromise()
-        .retry(3)
-        .catch(this.handleError)
-    );
+    return this.http
+      .delete(this.url + '/' + id)
+      .map((response: Response) => response.body)
+      .retry(3)
+      .catch(this.handleError);
   }
 
   private handleError(error: Response) {
