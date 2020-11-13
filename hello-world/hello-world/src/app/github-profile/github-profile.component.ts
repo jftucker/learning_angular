@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class GithubProfileComponent {
   constructor(private router: Router) {}
 
-  submit() {
+  submit(): void {
     this.router.navigate(['/followers'], {
       queryParams: { page: 1, order: 'newest' },
     });

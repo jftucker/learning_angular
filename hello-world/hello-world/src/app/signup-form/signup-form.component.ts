@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { UsernameValidators } from './username.validators';
 
 @Component({
@@ -23,13 +28,13 @@ export class SignupFormComponent {
     }),
   });
 
-  login() {
+  login(): void {
     this.form.setErrors({
       invalidLogin: true,
     });
   }
 
-  get username() {
+  get username(): AbstractControl {
     return this.form.get('account.username');
   }
 }

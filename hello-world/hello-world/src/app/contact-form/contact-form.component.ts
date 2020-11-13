@@ -11,11 +11,11 @@ export class ContactFormComponent {
     { id: 2, name: 'Phone' },
   ];
 
-  log(x) {
+  log(x): void {
     console.log(x);
   }
 
-  submit(f) {
+  submit(f): void {
     console.log(f);
   }
 }

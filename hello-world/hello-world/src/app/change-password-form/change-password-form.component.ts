@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { PasswordValidators } from './password.validators';
 
 @Component({
@@ -23,15 +28,15 @@ export class ChangePasswordFormComponent {
     );
   }
 
-  get old() {
+  get old(): AbstractControl {
     return this.form.get('old');
   }
 
-  get new() {
+  get new(): AbstractControl {
     return this.form.get('new');
   }
 
-  get confirm() {
+  get confirm(): AbstractControl {
     return this.form.get('confirm');
   }
 }

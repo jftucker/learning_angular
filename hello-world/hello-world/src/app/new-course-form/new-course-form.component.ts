@@ -3,7 +3,6 @@ import {
   FormArray,
   FormBuilder,
   FormControl,
-  FormGroup,
   Validators,
 } from '@angular/forms';
 
@@ -26,17 +25,17 @@ export class NewCourseFormComponent {
     });
   }
 
-  addTopic(topic: HTMLInputElement) {
+  addTopic(topic: HTMLInputElement): void {
     this.topics.push(new FormControl(topic.value));
     topic.value = '';
   }
 
-  removeTopic(topic: FormControl) {
-    let index = this.topics.controls.indexOf(topic);
+  removeTopic(topic: FormControl): void {
+    const index = this.topics.controls.indexOf(topic);
     this.topics.removeAt(index);
   }
 
-  get topics() {
+  get topics(): FormArray {
     return this.form.get('topics') as FormArray;
   }
 }

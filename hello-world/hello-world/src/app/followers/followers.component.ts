@@ -19,11 +19,11 @@ export class FollowersComponent implements OnInit {
     private service: FollowersService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     Observable.combineLatest([this.route.paramMap, this.route.queryParamMap])
       .switchMap((combined) => {
-        let id = combined[0].get('id');
-        let page = combined[1].get('page');
+        const id = combined[0].get('id');
+        const page = combined[1].get('page');
 
         return this.service.getAll();
       })
