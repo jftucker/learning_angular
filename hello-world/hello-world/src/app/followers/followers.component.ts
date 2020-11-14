@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FollowersService } from '../services/followers.service';
-import { Observable } from 'rxjs';
 import { combineLatest } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
