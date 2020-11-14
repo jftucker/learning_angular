@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FollowersService } from '../services/followers.service';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/combineLatest';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'followers',
@@ -20,13 +19,15 @@ export class FollowersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    Observable.combineLatest([this.route.paramMap, this.route.queryParamMap])
-      .switchMap((combined) => {
-        const id = combined[0].get('id');
-        const page = combined[1].get('page');
+    combineLatest([this.route.paramMap, this.route.queryParamMap])
+      .pipe(
+        switchMap((combined) => {
+          const id = combined[0].get('id');
+          const page = combined[1].get('page');
 
-        return this.service.getAll();
-      })
+          return this.service.getAll();
+        })
+      )
       .subscribe((followers: any) => (this.followers = followers));
   }
 }

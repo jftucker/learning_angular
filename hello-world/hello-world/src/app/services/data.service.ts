@@ -4,10 +4,7 @@ import { AppError } from '../app-error';
 import { NotFoundError } from '../common/not-found-error';
 import { Observable, throwError } from 'rxjs';
 import { BadInput } from '../common/bad-input';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/retry';
+import { map, retry, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +15,7 @@ export class DataService {
   getAll(): Observable<any> {
     return this.http
       .get(this.url, { observe: 'response' })
-      .map((response) => response.body);
-    // .catch(this.handleError);
+      .pipe(map((response) => response.body));
   }
 
   create(resource): Observable<any> {
@@ -27,8 +23,10 @@ export class DataService {
       .post(this.url, JSON.stringify(resource), {
         observe: 'response',
       })
-      .map((response) => response.body)
-      .catch(this.handleError);
+      .pipe(
+        map((response) => response.body),
+        catchError(this.handleError)
+      );
   }
 
   update(resource): Observable<any> {
@@ -36,16 +34,18 @@ export class DataService {
       .patch(this.url + '/' + resource.id, JSON.stringify({ isRead: true }), {
         observe: 'response',
       })
-      .map((response) => response.body)
-      .catch(this.handleError);
+      .pipe(
+        map((response) => response.body),
+        catchError(this.handleError)
+      );
   }
 
   delete(id): Observable<any> {
-    return this.http
-      .delete(this.url + '/' + id)
-      .map((response: Response) => response.body)
-      .retry(3)
-      .catch(this.handleError);
+    return this.http.delete(this.url + '/' + id).pipe(
+      map((response: Response) => response.body),
+      retry(3),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: Response): Observable<Error> {
